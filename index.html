@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <h1>Smart Task Manager</h1>
+
+  <!-- INPUT -->
+  <div class="input-group">
+    <input 
+      id="taskInput" 
+      placeholder="Введите задачу..." 
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+    />
+    <button id="addBtn">Добавить</button>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <button data-filter="all">Все</button>
+    <button data-filter="active">Активные</button>
+    <button data-filter="completed">Выполненные</button>
+
+    <button class="clear-btn">Очистить выполненные</button>
+
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-thumb"></div>
+    </div>
+  </div>
+
+  <!-- TASK LIST -->
+  <ul id="taskList"></ul>
+
+  <!-- COUNTER -->
+  <p id="counter"></p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

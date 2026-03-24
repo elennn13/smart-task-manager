@@ -1,0 +1,21 @@
+Smart Task Manager
+
+Современное ToDo-приложение с glass UI и переключением темы.
+
+Возможности
+- Добавление и удаление задач
+- Отметка выполненных задач
+- Фильтрация (все / активные / выполненные)
+- Очистка выполненных
+- переключение темы ночь/день
+- Сохранение данных (localStorage)
+- Адаптивный дизайн
+
+
+- HTML
+- CSS (Glassmorphism)
+- JavaScript (Vanilla JS)
+
+
+bash
+git clone https://github.com/elennn13/smart-task-manager.git
