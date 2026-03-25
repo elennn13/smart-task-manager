@@ -17,5 +17,3 @@ Smart Task Manager
 - JavaScript (Vanilla JS)
 
 
-bash
-git clone https://github.com/elennn13/smart-task-manager.git
