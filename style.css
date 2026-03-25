@@ -12,16 +12,18 @@ body {
   align-items: flex-start;
   overflow-x: hidden;
 }
+
 html,
 body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
 /* ================= APP ================= */
 
 .app {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px; 
 
   padding: 24px;
   border-radius: 28px;
@@ -40,19 +42,12 @@ body {
   flex-direction: column;
 }
 
-/*  */
+/* ================= TASK LIST ================= */
 #taskList {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-
-/*   */
-.task {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 /* ================= HEADER ================= */
@@ -63,13 +58,14 @@ h1 {
   letter-spacing: 1px;
 }
 
-/* ================= INPUT ================= */
+/* ================= INPUT GROUP ================= */
 
 .input-group {
   display: flex;
   gap: 10px;
 }
 
+/* Общие стили для всех полей ввода */
 input {
   flex: 1;
   padding: 14px;
@@ -79,7 +75,7 @@ input {
   outline: none;
 
   background: rgba(255, 255, 255, 0.05);
-  color: rgb(222, 198, 162);
+  color: rgb(222, 198, 162); /* Цвет текста для всех полей */
 
   transition: 0.3s;
 }
@@ -87,6 +83,21 @@ input {
 input:focus {
   box-shadow: 0 0 20px rgba(255, 180, 120, 0.3);
 }
+
+/* ================= SEARCH GROUP ================= */
+.search-group {
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* Стили для поиска (наследует общие стили input, добавляем специфику) */
+.search-group input {
+  width: 100%;
+  box-sizing: border-box;
+  
+}
+
+
 
 /* ================= BUTTON ================= */
 
@@ -132,7 +143,7 @@ button:active {
   width: 100%;
 }
 
-/* ================= TASK ================= */
+/* ================= TASK LIST UL ================= */
 
 ul {
   width: 100%;
@@ -142,12 +153,12 @@ ul {
   list-style: none;
 }
 
-/*   li */
 ul li {
   background: none;
 }
 
-/* MAIN CARD */
+/* ================= TASK CARD ================= */
+
 .task {
   position: relative;
   overflow: hidden;
@@ -175,111 +186,66 @@ ul li {
 
   --x: 50%;
   --y: 50%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* DARK */
-body:not(.light) .task:hover {
-  transform: translateY(-8px) scale(1.04);
-
-  box-shadow:
-    0 0 40px rgba(255, 180, 120, 0.5),
-    0 0 120px rgba(255, 140, 80, 0.25),
-    25px 25px 80px rgba(0, 0, 0, 0.7);
+.task.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
 }
 
-/* LIGHT */
-body.light .task:hover {
-  transform: translateY(-6px) scale(1.03);
-
-  background: linear-gradient(145deg, #d6c6b8, #bfae9e);
-
-  box-shadow:
-    inset 0 4px 10px rgba(0, 0, 0, 0.15),
-    0 20px 40px rgba(120, 90, 60, 0.25);
-}
-/* ================= LIGHT HOVER ================= */
-
-body.light button:hover {
-  transform: translateY(-2px);
-
-  background: linear-gradient(145deg, #e0d2c6, #cbb8a8);
-
-  box-shadow:
-    inset 0 3px 8px rgba(0, 0, 0, 0.15),
-    0 10px 20px rgba(0, 0, 0, 0.1);
-}
-/*   */
+/* Декоративные элементы task */
 .task::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   background: none;
-
   opacity: 1;
+  z-index: 1;
 }
 
-/*  glow */
+/* Glow эффект */
 .task::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 40px;
-
   background: radial-gradient(
     circle at var(--x) var(--y),
     rgba(255, 200, 150, 0.25) transparent 60%
   );
-
   opacity: 0;
   transition:
     opacity 0.3s ease,
     background 0.1s;
   pointer-events: none;
+  z-index: 1;
 }
 
-.task:hover {
-  transform: translateY(-8px) scale(1.04);
-
-  box-shadow:
-    0 0 40px rgba(120, 114, 109, 0.5),
-    0 0 120px rgba(255, 140, 80, 0.25),
-    25px 25px 80px rgba(0, 0, 0, 0.7);
-}
-.check {
-  transition: 0.3s;
+.task:hover::after {
+  opacity: 1;
 }
 
-.check:hover {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-}
-
-.check.checked {
-  background: rgba(255, 200, 150, 0.9);
-  color: black;
-
-  box-shadow: 0 0 20px rgba(255, 180, 120, 0.6);
-}
-input:focus {
-  box-shadow:
-    0 0 15px rgba(255, 200, 150, 0.4),
-    0 0 40px rgba(255, 140, 80, 0.2);
-}
-/* ================= CONTENT ================= */
+/* ================= TASK CONTENT ================= */
 
 .task-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .task-actions {
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .task span {
@@ -287,22 +253,8 @@ input:focus {
   letter-spacing: 3px;
   text-transform: uppercase;
 }
-.task {
-  position: relative;
-  overflow: hidden;
-}
 
-.task-left,
-.task-actions {
-  position: relative;
-  z-index: 2;
-}
-.task::before,
-.task::after {
-  z-index: 1;
-}
-
-/* ================= CHECK ================= */
+/* ================= CHECKBOX ================= */
 
 .check {
   width: 26px;
@@ -317,9 +269,20 @@ input:focus {
   position: relative;
   z-index: 3;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-/* ================= BUTTONS ================= */
+.check:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.check.checked {
+  background: rgba(255, 200, 150, 0.9);
+  color: black;
+  box-shadow: 0 0 20px rgba(255, 180, 120, 0.6);
+}
+
+/* ================= BUTTONS EDIT/DELETE ================= */
 
 .edit-btn,
 .delete-btn {
@@ -339,8 +302,6 @@ input:focus {
   flex-shrink: 0;
 
   box-sizing: border-box;
-
-  /*    */
   overflow: hidden;
 }
 
@@ -357,14 +318,14 @@ input:focus {
   height: 24px;
 }
 
-/* ================= DONE ================= */
+/* ================= DONE STATE ================= */
 
 .done {
   text-decoration: line-through;
   opacity: 0.5;
 }
 
-/* ================= THEME ================= */
+/* ================= LIGHT THEME ================= */
 
 body.light {
   color: #111;
@@ -380,6 +341,10 @@ body.light input {
   color: #111;
 }
 
+body.light input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 body.light button {
   background: rgba(0, 0, 0, 0.05);
   color: #111;
@@ -390,54 +355,65 @@ body.light .task {
   color: #111;
 }
 
-/* ================= TOGGLE ================= */
+/* Hover эффекты для светлой темы */
+body.light .task:hover {
+  transform: translateY(-6px) scale(1.03);
+  background: linear-gradient(145deg, #d6c6b8, #bfae9e);
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(120, 90, 60, 0.25);
+}
+
+body.light button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(145deg, #e0d2c6, #cbb8a8);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover эффекты для темной темы */
+body:not(.light) .task:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow:
+    0 0 40px rgba(255, 180, 120, 0.5),
+    0 0 120px rgba(255, 140, 80, 0.25),
+    25px 25px 80px rgba(0, 0, 0, 0.7);
+}
+
+/* ================= THEME TOGGLE ================= */
 
 .theme-toggle {
   position: relative;
-
   width: 25px;
   height: 50px;
-
   border-radius: 40px;
-
   background: linear-gradient(180deg, #2b1f1a, #120c0a);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
-
   box-shadow:
     inset 0 2px 6px rgba(255, 255, 255, 0.05),
     inset 0 -4px 10px rgba(0, 0, 0, 0.6),
     0 10px 30px rgba(0, 0, 0, 0.7);
-
   transition: 0.4s ease;
 }
 
-/* ================= THUMB ================= */
-
 .toggle-thumb {
   position: absolute;
-
   width: 23px;
   height: 23px;
-
   border-radius: 50%;
-
   bottom: 1px;
-
   background: linear-gradient(145deg, #3a2a24, #1c140f);
-
   box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.6),
     inset 0 1px rgba(255, 255, 255, 0.1);
-
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-/* ================= DARK MODE ( glow) ================= */
 
+/* Dark mode toggle glow */
 body.dark .toggle-thumb {
   box-shadow:
     0 0 15px rgba(255, 210, 170, 0.6),
@@ -446,21 +422,16 @@ body.dark .toggle-thumb {
     inset 0 1px rgba(255, 255, 255, 0.2);
 }
 
-/* ================= LIGHT MODE ( glow) ================= */
-
+/* Light mode toggle */
 body.light .toggle-thumb {
   bottom: 28px;
-
   background: linear-gradient(145deg, #f2e6da, #d6c6b8);
-
   box-shadow:
     0 0 20px rgba(0, 0, 0, 0.25),
     0 0 40px rgba(0, 0, 0, 0.15),
     0 0 80px rgba(255, 160, 100, 0.25),
     inset 0 1px rgba(255, 255, 255, 0.9);
 }
-
-/* ================= TRACK LIGHT MODE ================= */
 
 body.light .theme-toggle {
   background: linear-gradient(180deg, #f4e9de, #d6c6b8);
@@ -478,51 +449,14 @@ body.light .theme-toggle {
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-
   width: 60%;
   height: 20px;
-
   background: radial-gradient(ellipse, rgba(255, 180, 120, 0.2), transparent);
-
   filter: blur(8px);
 }
 
-/* ================= HOVER ================= */
-
 .theme-toggle:hover .toggle-thumb {
   transform: scale(1.05);
-}
-
-.toggle-circle {
-  width: 34px;
-  height: 34px;
-
-  border-radius: 50%;
-
-  position: absolute;
-  bottom: 5px;
-  top: 50%;
-  left: 4px;
-
-  transform: translateY(-50%);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255, 255, 255, 0.2);
-}
-.toggle-circle img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
-}
-
-body.light .toggle-circle {
-  left: calc(100% - 38px);
 }
 
 /* ================= COUNTER ================= */
@@ -532,7 +466,9 @@ body.light .toggle-circle {
   margin-top: 10px;
   opacity: 0.7;
 }
-/* ================= MOBILE ================= */
+
+/* ================= MOBILE RESPONSIVE ================= */
+
 @media (max-width: 600px) {
   body {
     padding: 8px;
@@ -548,13 +484,14 @@ body.light .toggle-circle {
     margin-bottom: 12px;
   }
 
-  /* INPUT */
+  /* INPUT и SEARCH */
   .input-group {
     flex-direction: column;
     gap: 6px;
   }
 
-  input {
+  input,
+  .search-group input {
     padding: 10px;
     font-size: 14px;
     border-radius: 12px;
@@ -566,7 +503,11 @@ body.light .toggle-circle {
     font-size: 14px;
   }
 
-  /* FILTERS    */
+  .search-group {
+    margin-top: 10px;
+  }
+
+  /* FILTERS */
   .filters {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -582,7 +523,7 @@ body.light .toggle-circle {
     grid-column: span 2;
   }
 
-  /* toggle  */
+  /* Toggle */
   .theme-toggle {
     grid-column: span 2;
     margin-top: 5px;
@@ -593,7 +534,6 @@ body.light .toggle-circle {
   .task {
     padding: 12px;
     border-radius: 18px;
-
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
@@ -609,14 +549,12 @@ body.light .toggle-circle {
     justify-content: flex-end;
   }
 
-  /*   */
   .edit-btn,
   .delete-btn {
     width: 32px;
     height: 32px;
   }
 
-  /*  */
   .check {
     width: 20px;
     height: 20px;
@@ -626,7 +564,9 @@ body.light .toggle-circle {
     font-size: 12px;
   }
 }
+
 /* ================= SMALL MOBILE ================= */
+
 @media (max-width: 400px) {
   h1 {
     font-size: 18px;
@@ -643,4 +583,24 @@ body.light .toggle-circle {
   .task span {
     font-size: 12px;
   }
+}
+
+/* ================= FIX INPUT EDIT ================= */
+
+.task-left span,
+.task-left input {
+  flex: 1;
+}
+
+.task-left input.task-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 3px;
 }
